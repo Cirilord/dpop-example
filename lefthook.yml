@@ -1,0 +1,15 @@
+commit-msg:
+  commands:
+    commit-lint:
+      run: yarn commit-lint --edit {1}
+
+pre-commit:
+  commands:
+    format-check:
+      run: yarn format:check
+      stage_fixed: true
+    lint-check:
+      run: yarn lint:check
+      stage_fixed: true
+    type-check:
+      run: yarn type-check

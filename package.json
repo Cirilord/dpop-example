@@ -1,0 +1,53 @@
+{
+  "name": "dpop-example",
+  "private": true,
+  "type": "module",
+  "description": "Didactic DPoP (RFC 9449) resource server with Keycloak, Redis, a demo client, and e2e tests",
+  "packageManager": "yarn@1.22.22",
+  "engines": {
+    "node": "24.16.0"
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "demo": "tsx demo/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "vitest run --config vitest.e2e.config.ts",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint . --fix",
+    "lint:check": "eslint .",
+    "infra": "docker compose up -d",
+    "infra:down": "docker compose down",
+    "prepare": "lefthook install || true",
+    "commit-lint": "commitlint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "fastify": "^5.12.5",
+    "ioredis": "^6.0.0",
+    "jose": "^6.2.12"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/js": "^9.36.0",
+    "@types/node": "^24.13.3",
+    "dpop": "^2.1.2",
+    "eslint": "^9.36.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.4.0",
+    "lefthook": "^2.1.4",
+    "prettier": "^3.6.2",
+    "tsx": "^4.23.13",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.44.0",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  }
+}

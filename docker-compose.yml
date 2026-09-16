@@ -1,0 +1,30 @@
+# Keycloak 26.7.3: DPoP is a supported feature (GA since 26.4).
+# No preview flag is required. Sender-constrained tokens are enabled
+# on the demo client via the official client attribute
+# `dpop.bound.access.tokens` (Admin Console: "Require DPoP bound tokens").
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.7.3
+    command: start-dev --import-realm
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_HTTP_ENABLED: 'true'
+      KC_HOSTNAME: http://localhost:8080
+      KC_HOSTNAME_STRICT: 'false'
+      KC_HEALTH_ENABLED: 'true'
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./keycloak:/opt/keycloak/data/import:ro
+
+  redis:
+    image: redis:7.4-alpine
+    ports:
+      - '6379:6379'
+    command: ['redis-server', '--save', '', '--appendonly', 'no']
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 10
